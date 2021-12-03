@@ -33,22 +33,22 @@ variable "network" {
   default     = "default"
 }
 
-variable "ssh_key" {
-  type = list(object({
-      publickey = string
-      user = string
-  }))
-  description = "Lista de public ssh key que precisa ter acesso a instanc."
-  default = [ 
-      {
-        publickey = "username"
-        user = "ssh-rsa yourkeyabc username@PC"
-    }
-  ]
+variable "metadata_startup_script" {
+  type        = string
+  description = "Caminho do script shell do userdata"
+  default      = null
 }
 
-variable "metadata_startup_script" {
-  type = string
-  description = "Caminho do script shell a ser executado pelo userdata"
-  default = null
+variable "ssh_keys" {
+  type = list(object({
+    publickey = string
+    user = string
+  }))
+  description = "lista de pub ssh key que precisam ter acesso a VM"
+  default = [
+      {
+        user = "username"
+        publickey = "ssh-rsa yourkeyabc username@PC"
+      }
+  ]
 }
